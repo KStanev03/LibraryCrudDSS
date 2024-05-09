@@ -40,7 +40,6 @@ function App() {
   const handleBookDelete = (id) => {
     setBooks((prevBooks) => {
       const updatedBooks = prevBooks.filter((book) => book.id !== id);
-      // Reassign IDs sequentially
       const renumberedBooks = updatedBooks.map((book, index) => ({
         ...book,
         id: index + 1,
@@ -54,12 +53,10 @@ function App() {
 
   const handleBookSave = (book) => {
     if (selectedBook) {
-      // Update existing book
       setBooks((prevBooks) =>
         prevBooks.map((b) => (b.id === selectedBook.id ? { ...b, ...book } : b))
       );
     } else {
-      // Add new book
       const maxId = books.reduce((max, book) => Math.max(max, book.id), 0);
       const newId = maxId + 1;
       const newBook = { ...book, id: newId };
